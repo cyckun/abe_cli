@@ -17,6 +17,7 @@ class MY_GUI():
         self.policy_company = ""
         self.policy_dept = ""
         self.policy_level = ""
+        #(((Dept:SecurityResearch) or (level >= 4 )) and (Company:ByteDance))
 
 
     #设置窗口
@@ -50,7 +51,7 @@ class MY_GUI():
         self.policy_Company_Text = Text(self.init_window_name, width=20, height=2)  # set enc policy, show position
         self.policy_Dept_Text = Text(self.init_window_name, width=20, height=2)  # set enc policy, show position
         self.policy_Level_Text = Text(self.init_window_name, width=20, height=2)  # set enc policy, show position
-        self.policy_Descrip_Text = Text(self.init_window_name, width=20, height=2)
+        self.policy_Descrip_Text = Text(self.init_window_name, width=20, height=4)
         self.policy_Company_Text.grid(row=15, column=8) # policy window size;
         self.policy_Dept_Text.grid(row=20, column=8)
         self.policy_Level_Text.grid(row=25, column=8)
@@ -99,7 +100,7 @@ class MY_GUI():
             f.close()
         self.filepath = ""
         print("buffer:", buffer)
-
+        self.abe_set_enc_policy()
         policy = self.enc_policy
         print("policy:", policy)
         #policy = "(((Dept:SecurityResearch) and (level >= 4 )) and (Company:ByteDance))"
