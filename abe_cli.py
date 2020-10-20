@@ -17,6 +17,7 @@ class MY_GUI():
         self.policy_company = ""
         self.policy_dept = ""
         self.policy_level = ""
+        self.filepath_flag = 0
         #(((Dept:SecurityResearch) or (level >= 4 )) and (Company:ByteDance))
 
 
@@ -75,7 +76,14 @@ class MY_GUI():
        # Folderpath = filedialog.askdirectory() // test lator
         self.filepath = filedialog.askopenfilename()
        # print("path: ", filepath)
-        self.init_data_Text.insert(END, str(self.filepath))
+        if self.filepath_flag == 0:
+            self.init_data_Text.insert(END, str(self.filepath))
+            self.filepath_flag = 1
+        else:
+            self.init_data_Text.delete('1.0', 'end')
+            self.init_data_Text.insert(END, str(self.filepath))
+
+
 
         return 0
     def abe_set_enc_policy(self):
@@ -99,13 +107,13 @@ class MY_GUI():
             buffer = f.read()
             f.close()
         self.filepath = ""
-        print("buffer:", buffer)
+        # print("buffer:", buffer)
         self.abe_set_enc_policy()
         policy = self.enc_policy
         print("policy:", policy)
         #policy = "(((Dept:SecurityResearch) and (level >= 4 )) and (Company:ByteDance))"
         ct = cpabe_enc_cli(buffer, policy)
-        print("ct :", ct)
+        # print("ct :", ct)
         with open("./cipher.txt", "wb") as f:
             f.write(ct)
             f.close()
@@ -121,7 +129,8 @@ class MY_GUI():
         self.filepath = ""
         plain = cpabe_dec_cli(buffer)
         if plain != 0:
-            self.init_data_Text.insert(END, str(plain))
+            if len(plain) < 100:
+                self.init_data_Text.insert(END, str(plain))
             self.write_log_to_Text("dec success.")
             with open("./dec_result.txt", "wb") as f:
                 f.write(plain)

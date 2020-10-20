@@ -7,10 +7,10 @@ def rsa_test():
     pubkey, privkey = rsa.newkeys(2048)
     msg = "hello"
     time0 = time.time()
-    info = rsa.encrypt(msg.encode('utf-8'),pubkey)
+    cipher = rsa.encrypt(msg.encode('utf-8'),pubkey)
     print("rsa enc time:", time.time()-time0)
     time1 = time.time()
-    msg_dec = rsa.decrypt(info, privkey)
+    msg_dec = rsa.decrypt(cipher, privkey)
     print("rsa dec time:", time.time() - time1)
     print("dec result:", msg_dec)
 

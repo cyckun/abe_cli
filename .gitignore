@@ -1,1 +1,4 @@
-python/__pycache__/
+python/__pycache__/*
+build/
+.idea/
+__pycache__

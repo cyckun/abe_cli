@@ -60,7 +60,7 @@ def cpabe_dec_cli(ct):
     time_dec = time.time()
     pt2 = cpabe.decrypt(usr_id, ct)
     print("dec_time:", time.time()-time_dec)
-    print("bob dec result:", pt2)
+    # print("bob dec result:", pt2)
     print("CP-ABE dec!")
     return pt2
 
